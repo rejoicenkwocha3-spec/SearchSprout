@@ -94,11 +94,44 @@ function Dashboard({ session }) {
   )
 }
 
+function Landing({ session }) {
+  return (
+    <div className="site">
+      <header className="nav">
+        <strong>🌱 SearchSprout</strong>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          {session ? <Link className="btn" to="/dashboard">Dashboard</Link> : <><Link to="/signin">Sign in</Link><Link className="btn" to="/signup">Get started</Link></>}
+        </nav>
+      </header>
+      <section className="hero">
+        <h1>Grow better searches.</h1>
+        <p>SearchSprout helps you save, organize and revisit the searches that matter, all in one private dashboard.</p>
+        <div className="cta">
+          <Link className="btn big" to={session ? '/dashboard' : '/signup'}>{session ? 'Open dashboard' : 'Create free account'}</Link>
+          {!session && <Link className="btn big ghost" to="/signin">Sign in</Link>}
+        </div>
+      </section>
+      <section id="features" className="grid">
+        <div className="feat"><h3>🔎 Save searches</h3><p>Capture a search in one click and keep it with a timestamp.</p></div>
+        <div className="feat"><h3>🔒 Private by default</h3><p>Secure email sign-in powered by Supabase. Your list is yours.</p></div>
+        <div className="feat"><h3>📊 Simple dashboard</h3><p>See your activity and manage everything from one place.</p></div>
+      </section>
+      <section id="how" className="how">
+        <h2>How it works</h2>
+        <ol><li>Create your account</li><li>Add the searches you care about</li><li>Come back any time from the dashboard</li></ol>
+      </section>
+      <footer>© {new Date().getFullYear()} SearchSprout</footer>
+    </div>
+  )
+}
+
 export default function App() {
   const session = useSession()
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={session ? '/dashboard' : '/signin'} replace />} />
+      <Route path="/" element={<Landing session={session} />} />
       <Route path="/signin" element={<AuthForm mode="signin" session={session} />} />
       <Route path="/signup" element={<AuthForm mode="signup" session={session} />} />
       <Route path="/dashboard" element={<Protected session={session}><Dashboard session={session} /></Protected>} />
