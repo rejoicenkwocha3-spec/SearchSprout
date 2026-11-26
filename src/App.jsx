@@ -109,7 +109,7 @@ function Landing({ session }) {
         <h1>Grow better searches.</h1>
         <p>SearchSprout helps you save, organize and revisit the searches that matter, all in one private dashboard.</p>
         <div className="cta">
-          <Link className="btn big" to={session ? '/dashboard' : '/signup'}>{session ? 'Open dashboard' : 'Create free account'}</Link>
+          <Link className="btn big" to={session ? '/dashboard' : '/signup'}>{session ? 'Open dashboard' : 'Get started'}</Link>
           {!session && <Link className="btn big ghost" to="/signin">Sign in</Link>}
         </div>
       </section>
